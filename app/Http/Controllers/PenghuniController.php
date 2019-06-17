@@ -32,5 +32,31 @@ class PenghuniController extends Controller
         $idpenghuni = $request->query('id');
 		$data['list_penghuni'] = Penghuni::where('Penghuni_ID', $idpenghuni)->get();
 		return view('penghuni_edit', $data);
+    }
+    
+    public function formaddpenghuni(Request $request)
+	{
+		return view('penghuni_add');
+	}
+	public function addpenghuni(Request $request)
+	{
+		$qstatus = Penghuni::insert([
+            'Penghuni_ID' => $request->id,
+            'Penghuni_Nama' => $request->nama,
+			'Penghuni_Tgllahir' => $request->tgllahir,
+			'Penghuni_JK' => $request->jk,
+			'Penghuni_Kamar' => $request->kamar,
+			'Penghuni_NRP' => $request->nrp,
+			'Penghuni_Alamat' => $request->alamat,
+			'Penghuni_NoTelp' => $request->nomortelepon
+        ]);
+        return redirect()->action('PenghuniController@index');
+    }
+    
+    public function deletepenghuni(Request $request)
+	{
+        $idpenghuni = $request->query('id');
+		$qstatus = Penghuni::where('Penghuni_ID', $idpenghuni)->delete();
+		return redirect()->action('PenghuniController@index');
 	}
 }

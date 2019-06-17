@@ -49,7 +49,10 @@
                     <button id="submit" name="submit" type="submit" value="edit">Edit</button>
                 </form>
 				|
-				<a href="/penghuni/hapus/{{ $d->Penghuni_ID }}">Hapus</a>
+                <form method="get" action="{{ route('penghuni.delete') }}">
+                    <input type="hidden" name="id" value="<?php echo $d->Penghuni_ID ?>">
+                    <button id="submit" name="submit" type="submit" value="edit">Hapus</button>
+                </form>
             </td>
         </tr>
         <?php } ?>

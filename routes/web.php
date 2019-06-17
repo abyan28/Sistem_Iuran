@@ -24,3 +24,9 @@ Route::get('penghuni', 'PenghuniController@index')->name('penghuni.all');
 Route::get('penghuni/formeditpenghuni/', 'PenghuniController@formeditpenghuni')->name('penghuni.formedit');
 
 Route::post('penghuni/editpenghuni/', 'PenghuniController@editpenghuni')->name('penghuni.edit');
+
+Route::post('penghuni/addpenghuni/', 'PenghuniController@addpenghuni')->name('penghuni.add');
+
+Route::get('penghuni/formaddpenghuni/', 'PenghuniController@formaddpenghuni')->name('penghuni.formadd');
+
+Route::get('penghuni/deletepenghuni/', 'PenghuniController@deletepenghuni')->name('penghuni.delete');
