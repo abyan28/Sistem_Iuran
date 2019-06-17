@@ -19,4 +19,8 @@ Route::get('halo', function(){
     return 'Coba Laravel';
 });
 
-Route::get('penghuni', 'PenghuniController@index');
+Route::get('penghuni', 'PenghuniController@index')->name('penghuni.all');
+
+Route::get('penghuni/formeditpenghuni/', 'PenghuniController@formeditpenghuni')->name('penghuni.formedit');
+
+Route::post('penghuni/editpenghuni/', 'PenghuniController@editpenghuni')->name('penghuni.edit');

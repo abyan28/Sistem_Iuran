@@ -28,6 +28,7 @@
 			<th>NRP</th>
 			<th>Alamat</th>
 			<th>Nomor Telepon</th>
+            <th>Opsi</th>
 		<tr>
 		<?php
             $i=1;
@@ -42,6 +43,14 @@
 			<td><?=$d->Penghuni_NRP;?></td>
 			<td><?=$d->Penghuni_Alamat;?></td>
 			<td><?=$d->Penghuni_NoTelp;?></td>
+            <td>
+                <form method="get" action="{{ route('penghuni.formedit') }}">
+                    <input type="hidden" name="id" value="<?php echo $d->Penghuni_ID ?>">
+                    <button id="submit" name="submit" type="submit" value="edit">Edit</button>
+                </form>
+				|
+				<a href="/penghuni/hapus/{{ $d->Penghuni_ID }}">Hapus</a>
+            </td>
         </tr>
         <?php } ?>
 	</table>
