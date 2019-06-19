@@ -30,3 +30,8 @@ Route::post('penghuni/addpenghuni/', 'PenghuniController@addpenghuni')->name('pe
 Route::get('penghuni/formaddpenghuni/', 'PenghuniController@formaddpenghuni')->name('penghuni.formadd');
 
 Route::get('penghuni/deletepenghuni/', 'PenghuniController@deletepenghuni')->name('penghuni.delete');
+
+Route::get('penghuni/cari', 'PenghuniController@caripenghuni')->name('penghuni.cari');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

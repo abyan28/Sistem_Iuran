@@ -10,7 +10,7 @@ class PenghuniController extends Controller
 {
     function index()
     {
-        $data['list_penghuni'] = Penghuni::get();
+        $data['list_penghuni'] = Penghuni::paginate(5);
         return view('penghuni', $data);
     }
 
@@ -40,6 +40,23 @@ class PenghuniController extends Controller
 	}
 	public function addpenghuni(Request $request)
 	{
+		$messages = [
+			'required' => ':attribute Wajib Diisi!',
+			'min' => ':attribute harus diisi minimal :min karakter!',
+			'max' => ':attribute harus diisi maksimal :max karakter!',
+		];
+
+		$this->validate($request,[
+			'id' => 'required|min:4',
+			'nama' => 'required|min:5|max:20',
+			'tgllahir' => 'required',
+			'jk' => 'required',
+			'kamar'=> 'required|numeric',
+			'nrp' => 'required|numeric',
+			'alamat' => 'required',
+			'nomortelepon' => array('required', 'regex:/(^\d{1,15}$)/u')
+		], $messages);
+
 		$qstatus = Penghuni::insert([
             'Penghuni_ID' => $request->id,
             'Penghuni_Nama' => $request->nama,
@@ -49,7 +66,8 @@ class PenghuniController extends Controller
 			'Penghuni_NRP' => $request->nrp,
 			'Penghuni_Alamat' => $request->alamat,
 			'Penghuni_NoTelp' => $request->nomortelepon
-        ]);
+		]);
+
         return redirect()->action('PenghuniController@index');
     }
     
@@ -58,5 +76,14 @@ class PenghuniController extends Controller
         $idpenghuni = $request->query('id');
 		$qstatus = Penghuni::where('Penghuni_ID', $idpenghuni)->delete();
 		return redirect()->action('PenghuniController@index');
+	}
+
+	public function caripenghuni(Request $request)
+	{
+		$cari = $request->cari;
+
+		$data['list_penghuni'] = Penghuni::where('Penghuni_Nama', 'like', "%".$cari."%")->paginate(5);
+
+		return view('penghuni', $data);
 	}
 }

@@ -16,50 +16,77 @@
 </head>
 <body>
 	<div class="container">
-    <div class="card card-register">
-      <div class="card-body">
-	<table class="table table-striped table-dark">
-		<tr>
-			<th>ID</th>
-			<th>Nama</th>
-			<th>Tanggal Lahir</th>
-			<th>Jenis Kelamin</th>
-			<th>Kamar</th>
-			<th>NRP</th>
-			<th>Alamat</th>
-			<th>Nomor Telepon</th>
-            <th>Opsi</th>
-		<tr>
-		<?php
-            $i=1;
-            foreach ($list_penghuni as $d) {
-        ?>
-		<tr>
-            <td><?=$d->Penghuni_ID;?></td>
-			<td><?=$d->Penghuni_Nama;?></td>
-            <td><?=$d->Penghuni_Tgllahir;?></td>
-            <td><?=$d->Penghuni_JK;?></td>
-			<td><?=$d->Penghuni_Kamar;?></td>
-			<td><?=$d->Penghuni_NRP;?></td>
-			<td><?=$d->Penghuni_Alamat;?></td>
-			<td><?=$d->Penghuni_NoTelp;?></td>
-            <td>
-                <form method="get" action="{{ route('penghuni.formedit') }}">
-                    <input type="hidden" name="id" value="<?php echo $d->Penghuni_ID ?>">
-                    <button id="submit" name="submit" type="submit" value="edit">Edit</button>
+        <div class="card">
+            <div class="card-body">
+                <h2 class="text-center">Sistem Informasi Iuran Kontrakan</h2>
+                <p>Cari Data Penghuni :</p>
+                <div class="row">
+                <div class="col-md-3">
+                <form action="{{ route('penghuni.cari') }}" method="GET" class="form-inline">
+                    <input class="form-control" type="text" name="cari" placeholder="Cari Penghuni..." value="{{ old('cari') }}">
+                    <input class="btn btn-success" type="submit" value="CARI">
+                    
                 </form>
-				|
-                <form method="get" action="{{ route('penghuni.delete') }}">
-                    <input type="hidden" name="id" value="<?php echo $d->Penghuni_ID ?>">
-                    <button id="submit" name="submit" type="submit" value="edit">Hapus</button>
-                </form>
-            </td>
-        </tr>
-        <?php } ?>
-	</table>
-	</div>
+                </div>
+                <div class="col-md-3">
+                <a href="{{ route('penghuni.formadd') }}" class="btn btn-primary">TAMBAH</a>
+                </div>
+                </div>
+                <table class="table table-striped table-info">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>ID</th>
+                            <th>Nama</th>
+                            <th>Tanggal Lahir</th>
+                            <th>Jenis Kelamin</th>
+                            <th>Kamar</th>
+                            <th>NRP</th>
+                            <th>Alamat</th>
+                            <th>Nomor Telepon</th>
+                            <th>Opsi</th>
+                            <th></th>
+                        <tr>
+                    </thead>
+                    <?php
+                        $i=1;
+                        foreach ($list_penghuni as $d) {
+                    ?>
+                    <tr>
+                        <td><?=$d->Penghuni_ID;?></td>
+                        <td><?=$d->Penghuni_Nama;?></td>
+                        <td><?=$d->Penghuni_Tgllahir;?></td>
+                        <td><?=$d->Penghuni_JK;?></td>
+                        <td><?=$d->Penghuni_Kamar;?></td>
+                        <td><?=$d->Penghuni_NRP;?></td>
+                        <td><?=$d->Penghuni_Alamat;?></td>
+                        <td><?=$d->Penghuni_NoTelp;?></td>
+                        <td>
+                            <form method="get" action="{{ route('penghuni.formedit') }}">
+                                <input type="hidden" name="id" value="<?php echo $d->Penghuni_ID ?>">
+                                <input class="btn btn-warning btn-sm" id="submit" name="submit" type="submit" value="EDIT">
+                            </form>
+                            
+                        </td>
+                        <td>
+                            <form method="get" action="{{ route('penghuni.delete') }}">
+                                <input type="hidden" name="id" value="<?php echo $d->Penghuni_ID ?>">
+                                <input class="btn btn-danger btn-sm" id="submit" name="submit" type="submit" value="HAPUS">
+                            </form>
+                        </td>
+                    </tr>
+                    </div>
+                    <?php } ?>
+                </table>
+    
+                Halaman             : {{ $list_penghuni->currentPage() }} <br/>
+                Jumlah Data         : {{ $list_penghuni->total() }} <br/>
+                Data per Halaman    : {{ $list_penghuni->perPage() }} <br/>
+
+                {{ $list_penghuni->links() }}
+
+	        </div>
+        </div>
     </div>
-  </div>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
