@@ -45,6 +45,8 @@
                             <th>Nomor Telepon</th>
                             <th>Opsi</th>
                             <th></th>
+                            <th>Foto</th>
+                            <th>Keterangan</th>
                         <tr>
                     </thead>
                     <?php
@@ -73,6 +75,8 @@
                                 <input class="btn btn-danger btn-sm" id="submit" name="submit" type="submit" value="HAPUS">
                             </form>
                         </td>
+                        <td><img width="150px" src="{{ url('/data_file/'.$d->File) }}"></td>
+                        <td><?=$d->Keterangan;?></td>
                     </tr>
                     </div>
                     <?php } ?>

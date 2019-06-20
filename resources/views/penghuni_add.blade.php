@@ -29,7 +29,7 @@
 							</div>
 						@endif
 
-						<form "form-group" action="{{ route('penghuni.add') }}" method="post">
+						<form "form-group" action="{{ route('penghuni.add') }}" method="post" enctype="multipart/form-data">
 						{{ csrf_field() }}
 						<table class="table table-striped table-dark">
 							<tr>
@@ -69,6 +69,14 @@
 							<tr>
 								<td>Nomor Telepon</td>
 								<td><input type="text" name="nomortelepon" class='form-control' value="{{ old('nomortelepon') }}"></td>
+							</tr>
+							<tr>
+								<td>Foto</td>
+								<td><input type="file" name="file" class='form-control' value="{{ old('file') }}"></td>
+							</tr>
+							<tr>
+								<td>Keterangan</td>
+								<td><input type="text" name="keterangan" class='form-control' value="{{ old('keterangan') }}"></td>
 							</tr>
 							<tr>
 								<td></td>

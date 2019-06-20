@@ -32,6 +32,7 @@ Route::get('penghuni/formaddpenghuni/', 'PenghuniController@formaddpenghuni')->n
 Route::get('penghuni/deletepenghuni/', 'PenghuniController@deletepenghuni')->name('penghuni.delete');
 
 Route::get('penghuni/cari', 'PenghuniController@caripenghuni')->name('penghuni.cari');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

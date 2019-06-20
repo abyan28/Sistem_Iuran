@@ -19,10 +19,19 @@
 			<div class="card-body">
 				<a href="{{ route('penghuni.all') }}" class="btn btn-primary">KEMBALI</a>
 				<table class="table table-striped table-dark">
+					@if (count($errors) > 0)
+						<div class="alert alert-danger">
+							<ul>
+								@foreach ($errors->all() as $error)
+									<li>{{ $error }}</li>
+								@endforeach
+							</ul>
+						</div>
+					@endif
 					<?php
 						foreach ($list_penghuni as $d) {
 					?>
-					<form "form-group" action="{{ route('penghuni.edit') }}" method="post">
+					<form "form-group" action="{{ route('penghuni.edit') }}" method="post" enctype="multipart/form-data">
 					{{ csrf_field() }}
 					<table class="table table-striped table-dark">
 						<tr>
@@ -48,15 +57,23 @@
 						</tr>
 						<tr>
 							<td>NRP</td>
-							<td><input type="text" name="nrp" value="<{{ $d->Penghuni_NRP }}"></td>
+							<td><input type="text" name="nrp" value="{{ $d->Penghuni_NRP }}"></td>
 						</tr>
 						<tr>
 							<td>Alamat</td>
-							<td><input type="text" name="alamat" value="<{{ $d->Penghuni_Alamat }}"></td>
+							<td><input type="text" name="alamat" value="{{ $d->Penghuni_Alamat }}"></td>
 						</tr>
 						<tr>
 							<td>Nomor Telepon</td>
 							<td><input type="text" name="nomortelepon" value="{{ $d->Penghuni_NoTelp }}"></td>
+						</tr>
+						<tr>
+							<td>Foto</td>
+							<td><input type="file" name="file" value="{{ $d->File }}"></td>
+						</tr>
+						<tr>
+							<td>Keterangan</td>
+							<td><input type="text" name="keterangan" value="{{ $d->Keterangan }}"></td>
 						</tr>
 						<tr>
 							<td></td>
